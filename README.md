@@ -78,15 +78,19 @@ La base de datos contiene las siguientes tablas principales:
 
 Durante la ejecución del proyecto se identificaron los siguientes hallazgos clave:
 
-- Clasificaciones de películas: La mayoría se encuentran en las categorías PG-13 y R.
+- **Clasificaciones de películas**: La mayoría se encuentran en las categorías PG-13 y NC-17.
 
-- Duraciones promedio: Las películas tienen una duración promedio de aproximadamente 120 minutos, con algunas superando las 3 horas.
+- **Duraciones promedio de películas**: Las películas tienen una duración promedio de aproximadamente 115 minutos.
 
-- Patrones de alquiler: Se detectó que los meses con más alquileres coinciden con temporadas de vacaciones.
+- **Duraciones promedio de alquileres**: Los alquileres tienen una duración promedio de casi 3 días.
 
-- Clientes frecuentes: Un grupo reducido de clientes genera la mayor parte de los ingresos, sugiriendo la implementación de programas de fidelización.
+- **Precio promedio de alquiler**: El precio promedio de alquiler por película es de 4 euros.
 
-- Actores más recurrentes: Algunos actores han participado en más de 40 películas, lo que los convierte en figuras clave del catálogo.
+- **Patrones de alquiler**: Se detectó que los meses con más alquileres coinciden con temporadas de vacaciones.
+
+- **Clientes frecuentes**: Un grupo reducido de clientes genera la mayor parte de los ingresos, sugiriendo la implementación de programas de fidelización.
+
+- **Actores más recurrentes**: Muchos actores han participado en más de 40 películas, lo que los convierte en figuras clave del catálogo.
 
 ## 🛠 7. Instalación y Uso
 
