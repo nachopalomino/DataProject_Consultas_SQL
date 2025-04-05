@@ -1,6 +1,3 @@
-select *
-from "rental";
-
 -- 1. Muestra los nombres de todas las películas con clasificación 'R'
 select 
 	title as pelicula,
