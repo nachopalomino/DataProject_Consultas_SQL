@@ -250,15 +250,11 @@ incluso si algunos actores no han actuado en ninguna película*/
 select
 	concat(a.first_name,' ', a.last_name) as actor,
 	 STRING_AGG(f.title, ', ') AS peliculas
-from film f
-left join 
-    film_actor fa on f.film_id = fa.film_id
-left join 
-    actor a on fa.actor_id = a.actor_id
-group by 
-    actor
-order by
-	actor;
+from actor a
+left join film_actor fa on a.actor_id = fa.actor_id
+left join film f on fa.film_id = f.film_id
+group by actor
+order by actor;
 
 -- 32. Obtener todas las películas que tenemos y todos los registros de alquiler
 select 
@@ -328,7 +324,7 @@ select
 	r.*
 from customer c
 inner join rental r on c.customer_id = r.customer_id 
-inner join payment p on r.customer_id = p.customer_id ;
+inner join payment p on r.rental_id = p.rental_id ;
 	
 -- 42. Muestra todos los clientes y sus alquileres si existen, incluyendo aquellos que no tienen alquileres
 select 
@@ -375,22 +371,22 @@ where fa.film_id is null;
 
 -- 46. Selecciona el nombre de los actores y la cantidad de películas en las que han participado
 select 
-	a.first_name as nombre_actores,
+	concat(first_name, ' ', last_name) as nombre_actores,
 	count(fa.film_id) as cantidad_peliculas
 from actor a
 left join film_actor fa on a.actor_id = fa.actor_id
-group by nombre_actores
+group by a.actor_id, a.first_name, a.last_name
 order by cantidad_peliculas desc;
 
 /* 47. Crea una vista llamada “actor_num_peliculas” que muestre los nombres de los actores y 
 el número de películas en las que han participado*/
 create or replace view actor_num_peliculas as 
 select 
-	a.first_name as nombre_actores,
+	concat(first_name, ' ', last_name) as nombre_actores,
 	count(fa.film_id) as cantidad_peliculas
 from actor a
 left join film_actor fa on a.actor_id = fa.actor_id
-group by nombre_actores
+group by a.actor_id, a.first_name, a.last_name
 order by cantidad_peliculas desc;
 
 --> Abrir vista
@@ -505,15 +501,11 @@ order by a.last_name asc, a.first_name asc;
 
 -- 55. Encuentra el nombre y apellido de los actores que no han actuado en ninguna película de la categoría ‘Music’.
 select 
-    concat(a.first_name, ' ', a.last_name) as actores,
-    c.name as categoria --> Comprobación categoría distinta de "Music".
+    a.first_name,
+    a.last_name
 from actor a
-left join film_actor fa on a.actor_id = fa.actor_id
-left join film f on fa.film_id = f.film_id
-left join film_category fc on f.film_id = fc.film_id
-left join category c on fc.category_id = c.category_id
 where a.actor_id not in (
-	select distinct fa.actor_id 
+	select fa.actor_id 
 	from film_actor fa
 	inner join film_category fc on fa.film_id = fc.film_id
 	inner join category c on fc.category_id = c.category_id 
